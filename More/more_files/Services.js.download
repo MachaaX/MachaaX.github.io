@@ -1,0 +1,130 @@
+window.onload = function() {
+    console.log("Landing-Page Loaded")
+    findLocalStorageIntial()
+    
+    window.addEventListener('scroll', function(){
+        const title = document.getElementById('header')
+        title.style.opacity = 1 - window.scrollY * 0.0019
+    })
+}
+
+function findLocalStorageIntial(){
+    const mode = localStorage.getItem("mode");
+    if(mode == "dark"){
+        console.log("dark-mode")
+        localStorage.setItem("mode", "dark")
+        document.getElementById("mode").checked = true
+        darkMode()
+
+    } else if (mode == "light"){   
+        console.log("light-mode")
+        localStorage.setItem("mode", "light")
+        document.getElementById("mode").checked = false
+        lightMode()
+
+    } else {
+        console.log("not set, intial=light-mode")
+        localStorage.setItem("mode", "light")
+        document.getElementById("mode").checked = false
+        lightMode()
+        
+    }
+}
+
+
+function switchMode(){
+    const toggle = document.getElementById("mode")
+    if(toggle.checked){ //This means dark mode (true)
+        console.log("dark")
+        localStorage.setItem("mode", "dark")
+        document.getElementById("mode").checked = true
+        darkMode()
+
+    } else { //This means light mode (false)
+        console.log("light")
+        localStorage.setItem("mode", "light")
+        document.getElementById("mode").checked = false
+        lightMode()
+    }
+}
+
+
+function lightMode(){
+     //This block of code is to change the menu
+     const links = document.getElementsByClassName('menu-item')
+     for(let i = 0; i < links.length; i++){
+         links[i].style.color = "black"
+         if(links[i].id == "service"){
+             links[i].style.color = "#f00"
+         }
+     }
+     document.getElementById("sun").style.display = "block"
+     document.getElementById("moon").style.display = "none"
+     document.getElementsByClassName('menu-container')[0].style.backgroundColor = "white"
+     document.getElementById('img-wht').style.display = "none"
+     document.getElementById('img-blk').style.display = "block"
+ 
+
+
+    //Block of code for the header
+    document.getElementById('header-container').style.backgroundColor = "white"
+    document.getElementById('header').style.color = "black"
+
+    //Block of code for the slider
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    styleElem.innerHTML = "#slider:before {background-color: #f00;}";
+
+     //Block of code which handles content
+    document.getElementById('content-container').style.backgroundColor = "white" 
+    const card = document.getElementsByClassName('card')
+    const cardInfo = document.getElementsByClassName('card-info')
+    document.getElementsByClassName('header-container')[0].style.color = "black" 
+    document.getElementsByClassName('card-header')[0].style.color = "black" 
+    document.getElementsByClassName('card-header')[1].style.color = "black" 
+    document.getElementsByClassName('card-header')[2].style.color = "black" 
+    for(let i = 0; i < card.length; i++){
+        card[i].style.backgroundColor = "white"
+        cardInfo[i].style.color = "black"
+    }
+
+}
+
+function darkMode(){
+    //This block of code is to change the menu
+    const links = document.getElementsByClassName('menu-item')
+    for(let i = 0; i < links.length; i++){
+        links[i].style.color = "white"
+        if(links[i].id == "service"){
+            links[i].style.color = "#f00"
+        }
+    }
+    document.getElementById("sun").style.display = "none"
+    document.getElementById("moon").style.display = "block"
+    document.getElementsByClassName('menu-container')[0].style.backgroundColor = "#343434"
+    document.getElementById('img-wht').style.display = "block"
+    document.getElementById('img-blk').style.display = "none"
+    
+    //Block of code for the header
+    document.getElementById('header-container').style.backgroundColor = "#343434"
+    document.getElementById('header').style.color = "white"
+
+    //Block of code for the slider
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    styleElem.innerHTML = "#slider:before {background-color: white;}";
+
+    //Block of code which handles content
+    document.getElementById('content-container').style.backgroundColor = "#343434" 
+    document.getElementsByClassName('header-container')[0].style.color = "white" 
+    document.getElementsByClassName('card-header')[0].style.color = "white" 
+    document.getElementsByClassName('card-header')[1].style.color = "white" 
+    document.getElementsByClassName('card-header')[2].style.color = "white" 
+    const card = document.getElementsByClassName('card')
+    const cardInfo = document.getElementsByClassName('card-info')
+    for(let i = 0; i < card.length; i++){
+        card[i].style.backgroundColor = "#343434"
+        cardInfo[i].style.color = "white"
+    }
+
+
+
+}

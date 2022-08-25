@@ -1,0 +1,137 @@
+window.onload = function() {
+    console.log("Landing-Page Loaded")
+    findLocalStorageIntial()   
+    rotateNames() 
+}
+
+
+async function rotateNames(){
+    while (true){
+        await new Promise(r => setTimeout(r, 700));
+        document.getElementById('text').innerHTML = "Full-Stack Developer"
+        document.getElementById('text').style.animation = "fadeInAndDisappear 2s"
+        await new Promise(r => setTimeout(r, 1900));
+        document.getElementById('text').style.animation = "none"
+        document.getElementById('text').innerHTML = ""
+
+        await new Promise(r => setTimeout(r, 700));
+        document.getElementById('text').innerHTML = "Tech Enthusiast"
+        document.getElementById('text').style.animation = "fadeInAndDisappear 2s"
+        await new Promise(r => setTimeout(r, 1900));
+        document.getElementById('text').style.animation = "none"
+        document.getElementById('text').innerHTML = ""
+
+        await new Promise(r => setTimeout(r, 700));
+        document.getElementById('text').innerHTML = "IIT Kgpain"
+        document.getElementById('text').style.animation = "fadeInAndDisappear 2s"
+        await new Promise(r => setTimeout(r, 1900));
+        document.getElementById('text').style.animation = "none"
+        document.getElementById('text').innerHTML = ""
+
+        await new Promise(r => setTimeout(r, 700));
+        document.getElementById('text').innerHTML = "Looking for Oppurtunities"
+        document.getElementById('text').style.animation = "fadeInAndDisappear 2s"
+        await new Promise(r => setTimeout(r, 1900));
+        document.getElementById('text').style.animation = "none"
+        document.getElementById('text').innerHTML = ""        
+    }
+}
+
+function findLocalStorageIntial(){
+    const mode = localStorage.getItem("mode");
+    if(mode == "dark"){
+        console.log("dark-mode")
+        localStorage.setItem("mode", "dark")
+        document.getElementById("mode").checked = true
+        darkMode()
+
+    } else if (mode == "light"){   
+        console.log("light-mode")
+        localStorage.setItem("mode", "light")
+        document.getElementById("mode").checked = false
+        lightMode()
+
+    } else {
+        console.log("not set, intial=light-mode")
+        localStorage.setItem("mode", "light")
+        document.getElementById("mode").checked = false
+        lightMode()
+        
+    }
+}
+
+function switchMode(){
+    const toggle = document.getElementById("mode")
+    if(toggle.checked){ //This means dark mode (true)
+        console.log("dark")
+        localStorage.setItem("mode", "dark")
+        document.getElementById("mode").checked = true
+        darkMode()
+
+    } else { //This means light mode (false)
+        console.log("light")
+        localStorage.setItem("mode", "light")
+        document.getElementById("mode").checked = false
+        lightMode()
+
+    }
+}
+
+
+
+
+function lightMode(){
+    //This block of code is to change the menu
+    const links = document.getElementsByClassName('menu-item')
+    for(let i = 0; i < links.length; i++){
+        links[i].style.color = "black"
+        if(links[i].id == "index"){
+            links[i].style.color = "#f00"
+        }
+    }
+    document.getElementById("sun").style.display = "block"
+    document.getElementById("moon").style.display = "none"
+    document.getElementsByClassName('menu-container')[0].style.backgroundColor = "white"
+    document.getElementById('img-wht').style.display = "none"
+    document.getElementById('img-blk').style.display = "block"
+
+    //This block of code handles background color and text color
+    document.getElementById('main-flex').style.backgroundColor = "white"
+    document.getElementById('name').style.color = "black"
+
+    //This block of code handles the slider
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    styleElem.innerHTML = "#slider:before {background-color: #f00;}";
+
+    
+
+}
+
+function darkMode(){
+    //This block of code is to change the menu
+    const links = document.getElementsByClassName('menu-item')
+    for(let i = 0; i < links.length; i++){
+        links[i].style.color = "white"
+        if(links[i].id == "index"){
+            links[i].style.color = "#f00"
+        }
+    }
+    document.getElementById("sun").style.display = "none"
+    document.getElementById("moon").style.display = "block"
+    document.getElementsByClassName('menu-container')[0].style.backgroundColor = "#343434"
+    document.getElementById('img-wht').style.display = "block"
+    document.getElementById('img-blk').style.display = "none"
+
+    //This block of code handles bacjground color and text
+    document.getElementById('main-flex').style.backgroundColor = "#343434"
+    document.getElementById('name').style.color = "white"
+    
+    //This block of code handles slider color
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    styleElem.innerHTML = "#slider:before {background-color: white;}";
+    
+
+
+
+}
+
